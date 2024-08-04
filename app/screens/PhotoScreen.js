@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   menubtn: {
     width: 50,
     height: 50,
-    backgroundColor: "blue",
+    backgroundColor: color.secondary,
   },
   image: {
     width: "100%",
