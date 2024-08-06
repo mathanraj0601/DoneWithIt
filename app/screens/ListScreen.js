@@ -3,10 +3,11 @@ import { StyleSheet, View } from "react-native";
 import Card from "../components/Card";
 import color from "../config/color";
 import ListItem from "../components/ListItem";
+import Screen from "../components/Screen";
 
 function ListScreen() {
   return (
-    <View style={styles.view}>
+    <Screen style={styles.view}>
       <ListItem
         style={styles.card}
         image={require("../assets/adaptive-icon.png")}
@@ -20,14 +21,14 @@ function ListScreen() {
         title="chair"
         subtitle="$100"
       />
-    </View>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   view: {
     backgroundColor: color.light,
-    marginTop: 50,
+    // marginTop: 50,
   },
   card: {
     margin: 10,
