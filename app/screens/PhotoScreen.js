@@ -1,13 +1,14 @@
 import React from "react";
 import { StyleSheet, View, Image, SafeAreaView } from "react-native";
 import color from "../config/color";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 function PhotoScreen(props) {
   return (
     <View style={styles.phoneScreenContainer}>
       <View style={styles.btnContainer}>
-        <View style={styles.closeBtn}></View>
-        <View style={styles.menubtn}></View>
+        <AntDesign name="close" size={30} />
+        <AntDesign name="delete" size={30} />
       </View>
       <Image
         style={styles.image}
@@ -29,17 +30,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "space-between",
     flexDirection: "row",
-    paddingHorizontal: 20,
-  },
-  closeBtn: {
-    height: 50,
-    width: 50,
-    backgroundColor: color.primary,
-  },
-  menubtn: {
-    width: 50,
-    height: 50,
-    backgroundColor: color.secondary,
+    paddingHorizontal: 10,
   },
   image: {
     width: "100%",
