@@ -5,11 +5,16 @@ import color from "../config/color";
 
 function ListItem(props) {
   return (
-    <View style={styles.listItemContainer}>
-      <Image style={styles.image} resizeMode="cover" source={props.image} />
+    <View style={[styles.listItemContainer, props.style]}>
+      {props.image && (
+        <Image style={styles.image} resizeMode="cover" source={props.image} />
+      )}
+      {props.ImageComponent}
       <View style={styles.textContainer}>
-        <AppText style={styles.title}>{props.title}</AppText>
-        <AppText style={styles.subTitle}>{props.subtitle}</AppText>
+        {props.title && <AppText style={styles.title}>{props.title}</AppText>}
+        {props.subTitle && (
+          <AppText style={styles.subTitle}>{props.subtitle}</AppText>
+        )}
       </View>
     </View>
   );
@@ -20,6 +25,7 @@ const styles = StyleSheet.create({
     height: "auto",
     flexDirection: "row",
     padding: 10,
+    backgroundColor: color.light,
   },
   image: {
     height: 70,
@@ -28,6 +34,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     paddingHorizontal: 10,
+    justifyContent: "center",
   },
   title: {
     fontSize: 18,
