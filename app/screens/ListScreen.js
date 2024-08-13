@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import Card from "../components/Card";
 import color from "../config/color";
@@ -7,48 +7,68 @@ import Screen from "../components/Screen";
 import ListItemSeperator from "../components/seperators/ListItemSeperator";
 
 function ListScreen() {
-  const data = [
+  const [refreshing, setRefreshing] = useState(false);
+  const deleteItem = (item) => {
+    setData((prev) => prev.filter((x) => x.id !== item.id));
+  };
+  const [data, setData] = useState([
     {
       id: 1,
-      name: "maddy",
-      description: "customer1",
-      image: require("../assets/splash.png"),
+      name: "Red Chair",
+      price: 100,
+      image: require("../assets/chair.jpg"),
     },
     {
       id: 2,
-      name: "yaadm",
-      description: "customer2",
-      image: require("../assets/icon.png"),
+      name: "Blue Chair",
+      price: 200,
+      image: require("../assets/chair.jpg"),
     },
-  ];
-
+    {
+      id: 3,
+      name: "yellow Chair",
+      price: 200,
+      image: require("../assets/chair.jpg"),
+    },
+    {
+      id: 4,
+      name: "green Chair",
+      price: 200,
+      image: require("../assets/chair.jpg"),
+    },
+  ]);
   return (
     <Screen style={styles.view}>
-      <ListItem
-        style={styles.card}
-        image={require("../assets/adaptive-icon.png")}
-        title="Chair Vendor"
-        subtitle="$100"
-      />
-
-      <Card
-        style={styles.card}
-        image={require("../assets/chair.jpg")}
-        title="chair"
-        subtitle="$100"
-      />
+      {/* <FlatList
+        data={data}
+        renderItem={({ item }) => (
+          <Card
+            image={item.image}
+            title={item.name}
+            subtitle={"$" + item.price}
+          />
+        )}
+        keyExtractor={(item) => item.id.toString()}
+        ItemSeparatorComponent={() => <ListItemSeperator margin={10} />}
+      /> */}
 
       <FlatList
         data={data}
         renderItem={({ item }) => (
           <ListItem
-            image={item.image}
-            title={item.name}
-            subtitle={item.description}
+            image={require("../assets/logo-red.png")}
+            title="Hello"
+            subTitle="Hello World !"
+            onPress={() => deleteItem(item)}
           />
         )}
         keyExtractor={(item) => item.id.toString()}
-        ItemSeparatorComponent={() => <ListItemSeperator />}
+        ItemSeparatorComponent={() => <ListItemSeperator margin={10} />}
+        refreshing={refreshing}
+        onRefresh={() => {
+          setData((prev) => prev.filter((x) => x.id == 1));
+          setRefreshing(false);
+        }}
       />
     </Screen>
   );
@@ -57,10 +77,8 @@ function ListScreen() {
 const styles = StyleSheet.create({
   view: {
     backgroundColor: color.light,
-    // marginTop: 50,
-  },
-  card: {
-    margin: 10,
+    // paddingHorizontal: 10,
+    flex: 1,
   },
 });
 export default ListScreen;

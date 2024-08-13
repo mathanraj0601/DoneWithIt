@@ -1,22 +1,42 @@
 import React from "react";
-import { StyleSheet, View, Image } from "react-native";
+import { StyleSheet, View, Image, TouchableOpacity, Text } from "react-native";
 import AppText from "./AppText";
 import color from "../config/color";
+import {
+  GestureHandlerRootView,
+  Swipeable,
+} from "react-native-gesture-handler";
+import ListItemDeleteIcon from "./ListItemDeleteIcon";
+// import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 
 function ListItem(props) {
   return (
-    <View style={[styles.listItemContainer, props.style]}>
-      {props.image && (
-        <Image style={styles.image} resizeMode="cover" source={props.image} />
-      )}
-      {props.ImageComponent}
-      <View style={styles.textContainer}>
-        {props.title && <AppText style={styles.title}>{props.title}</AppText>}
-        {props.subTitle && (
-          <AppText style={styles.subTitle}>{props.subtitle}</AppText>
+    <GestureHandlerRootView>
+      <Swipeable
+        renderRightActions={() => (
+          <ListItemDeleteIcon onPress={props.onPress} />
         )}
-      </View>
-    </View>
+      >
+        <View style={[styles.listItemContainer, props.style]}>
+          {props.image && (
+            <Image
+              style={styles.image}
+              resizeMode="cover"
+              source={props.image}
+            />
+          )}
+          {props.ImageComponent}
+          <View style={styles.textContainer}>
+            {props.title && (
+              <AppText style={styles.title}>{props.title}</AppText>
+            )}
+            {props.subTitle && (
+              <AppText style={styles.subTitle}>{props.subTitle}</AppText>
+            )}
+          </View>
+        </View>
+      </Swipeable>
+    </GestureHandlerRootView>
   );
 }
 
