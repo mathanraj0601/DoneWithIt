@@ -5,6 +5,7 @@ import color from "../config/color";
 import ListItem from "../components/ListItem";
 import Screen from "../components/Screen";
 import ListItemSeperator from "../components/seperators/ListItemSeperator";
+import AppTextInput from "../components/AppTextInput";
 
 function ListScreen() {
   const [refreshing, setRefreshing] = useState(false);
@@ -51,6 +52,13 @@ function ListScreen() {
         keyExtractor={(item) => item.id.toString()}
         ItemSeparatorComponent={() => <ListItemSeperator margin={10} />}
       /> */}
+
+      <AppTextInput
+        iconName="email"
+        placeholder={"Enter Email"}
+        keyboardType="email-address"
+      />
+      <AppTextInput placeholder={"Enter Nmae"} keyboardType="numeric" />
 
       <FlatList
         data={data}
