@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, Modal, StyleSheet, View } from "react-native";
 import Card from "../components/Card";
 import color from "../config/color";
 import ListItem from "../components/ListItem";
 import Screen from "../components/Screen";
 import ListItemSeperator from "../components/seperators/ListItemSeperator";
 import AppTextInput from "../components/AppTextInput";
+import AppPicker from "../components/AppPicker";
+import AppText from "../components/AppText";
+import { TouchableHighlight } from "react-native-gesture-handler";
 
 function ListScreen() {
   const [refreshing, setRefreshing] = useState(false);
@@ -38,6 +41,24 @@ function ListScreen() {
       image: require("../assets/chair.jpg"),
     },
   ]);
+
+  const [category, setCategory] = useState([
+    {
+      id: 1,
+      name: "chair",
+    },
+    {
+      id: 2,
+      name: "car",
+    },
+    {
+      id: 3,
+      name: "lbdasjdasjkdnaskjdnjlm",
+    },
+  ]);
+
+  const [selection, setSelection] = useState(category[0]);
+
   return (
     <Screen style={styles.view}>
       {/* <FlatList
@@ -77,6 +98,14 @@ function ListScreen() {
           setData((prev) => prev.filter((x) => x.id == 1));
           setRefreshing(false);
         }}
+      />
+
+      <AppPicker
+        text="category"
+        iconName="view-list"
+        selectedItem={selection}
+        onSelectItem={(item) => setSelection(item)}
+        data={category}
       />
     </Screen>
   );
