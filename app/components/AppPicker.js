@@ -18,7 +18,6 @@ function AppPicker({
   data,
   iconName,
   text,
-  onPress,
   selectedItem,
   onSelectItem,
   style,
