@@ -8,7 +8,9 @@ function AppForm({ initialValues, validateSchema, handleSubmit, children }) {
       initialValues={initialValues}
       validationSchema={validateSchema}
     >
-      {(handleBlur, hanldeSubmit, values, touched) => ({ children })}
+      {(handleSubmit, errors, setFieldTouched, handleChange, touched, values) =>
+        children
+      }
     </Formik>
   );
 }
