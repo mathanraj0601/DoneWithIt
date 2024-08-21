@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Image, StyleSheet } from "react-native";
 import DefaultStyles from "../config/style";
 import Screen from "../components/Screen";
@@ -7,22 +7,38 @@ import Button from "../components/Button/Button";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import ErrorComponent from "../components/ErrorComponent";
+import AppFormPicker from "../components/Form/AppFormPicker";
 
 function LoginScreen(props) {
-  const handleSubmit = (data) => {
+  const handleSubmit = (data, setSubmitting) => {
     setSubmitting(false);
-    console.log(data);
   };
+
+  const [category, setCategory] = useState([
+    {
+      id: 1,
+      name: "chair",
+    },
+    {
+      id: 2,
+      name: "car",
+    },
+    {
+      id: 3,
+      name: "lbdasjdasjkdnaskjdnjlm",
+    },
+  ]);
 
   const validateSchema = Yup.object().shape({
     email: Yup.string().email().label("Email").required(),
     password: Yup.string().min(4).label("Password").required(),
+    category: Yup.object().required(),
   });
   return (
     <Screen style={styles.container}>
       <Image source={require("../assets/logo-red.png")} style={styles.image} />
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ email: "", password: "", category: null }}
         onSubmit={handleSubmit}
         validationSchema={validateSchema}
       >
@@ -44,7 +60,7 @@ function LoginScreen(props) {
               iconName={"email"}
               autoComplete="email"
               value={values["email"]}
-              // onBlur={() => setFieldTouched("email", false)}
+              onBlur={() => setFieldTouched("email", true)}
               onChangeText={handleChange("email")}
             />
 
@@ -60,13 +76,19 @@ function LoginScreen(props) {
               autoCapitalize="none"
               placeholder={"Password"}
               value={values["password"]}
-              // onBlur={() => setFieldTouched("password", false)}
+              onBlur={() => setFieldTouched("password", true)}
               onChangeText={handleChange("password")}
             />
 
             <ErrorComponent touched={touched["password"]}>
               {errors.password}
             </ErrorComponent>
+
+            <AppFormPicker
+              iconName={"menu"}
+              name={"category"}
+              data={category}
+            />
 
             <Button style={styles.loginBtn} onPress={handleSubmit}>
               Login

@@ -23,7 +23,6 @@ function AppPicker({
   style,
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setIsModalOpen(true)}>
